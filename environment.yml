@@ -1,0 +1,25 @@
+# Conda environment for running the engine and training MCCFR / PG policies.
+#
+#   conda env create -f environment.yml
+#   conda activate pokerbots
+#
+# Deliberately CPU-only. MCCFR training is pure Python + numpy and gets no
+# benefit from a GPU; neural_cfr_bot is the only thing that wants torch, and it
+# is experimental, so torch is left out (add it by hand if you work on that bot).
+name: pkr
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy>=1.24
+  - pip
+  - pip:
+      - cython>=3.2.3     # needed to build pkrbot
+      - pkrbot>=1.1.0     # hand evaluation, provided by the competition
+      # torch is only needed to train/run neural_cfr_bot (Deep CFR). The engine,
+      # very_confused and tabular MCCFR do not import it, and tabular MCCFR gets
+      # nothing from a GPU. Uncomment to train Deep CFR, or add it later with:
+      #     conda activate pkr && pip install torch
+      # If the cluster needs a specific CUDA build, take the index URL from
+      # https://pytorch.org/get-started/locally/  e.g. cu121.
+      # - torch>=2.1

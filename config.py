@@ -1,0 +1,28 @@
+# PARAMETERS TO CONTROL THE BEHAVIOR OF THE GAME ENGINE
+# DO NOT REMOVE OR RENAME THIS FILE
+from pathlib import Path
+
+_HERE = Path(__file__).resolve().parent
+
+PLAYER_1_NAME = "player1"
+PLAYER_1_PATH = (_HERE / "mccfr_bot").as_posix()  # main bot
+# NO TRAILING SLASHES ARE ALLOWED IN PATHS
+PLAYER_2_NAME = "player2"
+PLAYER_2_PATH = (_HERE / "opponent_pool").as_posix()  # Training opponent pool
+# GAME PROGRESS IS RECORDED HERE
+GAME_LOG_FILENAME = "gamelog"
+# PLAYER_LOG_SIZE_LIMIT IS IN BYTES
+PLAYER_LOG_SIZE_LIMIT = 524288
+# STARTING_GAME_CLOCK AND TIMEOUTS ARE IN SECONDS
+ENFORCE_GAME_CLOCK = False
+STARTING_GAME_CLOCK = 6000.0
+BUILD_TIMEOUT = 1000.0
+CONNECT_TIMEOUT = 1000.0
+# THE GAME VARIANT FIXES THE PARAMETERS BELOW
+# CHANGE ONLY FOR TRAINING OR EXPERIMENTATION
+# Note: the neural bot doesn't take optimizer steps until its replay buffer
+# has at least `BOT_BATCH_SIZE` samples (default 256), which requires many hands.
+NUM_ROUNDS = 1000
+STARTING_STACK = 400
+BIG_BLIND = 2
+SMALL_BLIND = 1
